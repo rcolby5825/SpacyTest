@@ -17,16 +17,27 @@ if __name__ == '__main__':
     print_hi('PyCharm')
 
 nlp = spacy.load("en_core_web_sm")
-doc1 = nlp("This and not to see any money around or being spent this time of year.")
+doc1 = nlp("Apple is looking at buying U.K. startup for $1 billion.")
 print(doc1)
-#Iterate over tokens in a Doc
+# Iterate over tokens in a Doc
+
 for token in doc1:
     # Print the text and the predicted part-of-speech tag
     # predictive part of this may not be needed
     print({"text": token.text, "pos": token.pos_, "predictive": token.head.text})
+    print(token)
+    # for ent in doc1.ents:
+    #     print(ent.text, ent.label_)
 
+i = 0
+while i < len(doc1):
+    # print(i)
+    print("lemma", doc1[i].lemma_)
+    print("POS", doc1[i].tag_)
+    print("dependencies?", doc1[i].dep_)
+    i += 1
 
-doc = nlp(u"Apple is looking at buying U.K. startup for $1 billion")
+doc = nlp("Apple is looking at buying U.K. startup for $1 billion in the Spring to Autumn.")
 
 for ent in doc.ents:
     print(ent.text, ent.label_)
