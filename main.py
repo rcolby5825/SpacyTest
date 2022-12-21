@@ -20,4 +20,9 @@ doc = nlp("This is a sentence.")
 
 print(doc)
 
+# Iterate over tokens in a Doc
+for token in doc:
+    # Print the text and the predicted part-of-speech tag
+    print({"text": token.text, "pos": token.pos_})
+
 # See PyCharm help at https://www.jetbrains.com/help/pycharm/
