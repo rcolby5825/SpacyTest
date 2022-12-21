@@ -23,6 +23,11 @@ print(doc)
 # Iterate over tokens in a Doc
 for token in doc:
     # Print the text and the predicted part-of-speech tag
-    print({"text": token.text, "pos": token.pos_})
+    # predictive part of this may not be needed
+    print({"text": token.text, "pos": token.pos_, "predictive": token.head.text})
+
+# Iterate over named entities in a Doc
+for ent in doc.ents:
+    print(ent.text, ent.label_)
 
 # See PyCharm help at https://www.jetbrains.com/help/pycharm/
