@@ -2,8 +2,9 @@ FROM python:3.5-slim
 
 MAINTAINER rcolby1313 <rachael.colby@dharbor.com>
 
-#ENV LANG             en
-#ENV SPACY_VERSION    3.4.4
+ENV LANG='en'
+ENV SPACY_VERSION='3.4.0'
+ENV SPACY_MODEL='en_core_web_sm'
 
 RUN mkdir -p /usr/venv
 COPY . /usr/venv/
@@ -16,10 +17,14 @@ RUN pip3 install --upgrade pip setuptools
 ########################################
 # spaCy
 ########################################
-#RUN pip3 install spacy==${SPACY_VERSION}
-RUN pip3 install spacy
+#Command is having issues - look into upgrading python
+#RUN pip3 install 'spacy==${SPACY_VERSION}'
+#CMd is not needed when adding the model
 #RUN python3 -m spacy.${LANG}.download all
-RUN python3 -m spacy download en_core_web_sm
+#Cmd works
+RUN pip3 install spacy
+#RUN python3 -m spacy download en_core_web_sm
+RUN python3 -m spacy download ${SPACY_MODEL}
 
 # Check whether the model was successfully installed
 #RUN python3 /usr/spacy/test/load_lang.py

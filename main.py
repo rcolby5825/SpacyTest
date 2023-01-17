@@ -1,25 +1,30 @@
 # This is a sample Python script.
-from http.server import HTTPServer, BaseHTTPRequestHandler
-
+import json
 import spacy
 import requests
 
 from http.server import BaseHTTPRequestHandler, HTTPServer
 import logging
 
-# port = 3005
 
+# port = 3005
+t = []
 
 class S(BaseHTTPRequestHandler):
     def _set_response(self):
         self.send_response(200)
-        self.send_header('Content-type', 'text/html')
+        self.send_header('Content-type', 'application/json')
         self.end_headers()
 
     def do_GET(self):
-        logging.info("GET request,\nPath: %s\nHeaders:\n%s\n", str(self.path), str(self.headers))
+        logging.warn("GET request,\nPath: %s\nHeaders:\n%s\n", str(self.path), str(self.headers))
         self._set_response()
+        testcase()
+        self.wfile.write(json.dumps(t).encode())
         self.wfile.write("GET request for {}".format(self.path).encode('utf-8'))
+        # self.wfile.write(json.dumps(t).format(self.path).encode('utf-8'))
+
+
 
     def do_POST(self):
         content_length = int(self.headers['Content-Length'])  # <--- Gets the size of data
@@ -44,6 +49,36 @@ def run(server_class=HTTPServer, handler_class=S, port=8080):
     logging.info('Stopping httpd...\n')
 
 
+def testcase():
+    nlp = spacy.load("en_core_web_sm")
+    doc1 = nlp("Apple is looking at buying U.K. startup for $1 billion.")
+    print(doc1)
+    # Iterate over tokens in a Doc
+
+    for token in doc1:
+        # Print the text and the predicted part-of-speech tag
+        # predictive part of this may not be needed
+        logging.info({"text": token.text, "pos": token.pos_, "predictive": token.head.text})
+        t.append({"text": token.text, "pos": token.pos_, "predictive": token.head.text})
+        logging.info(token)
+    # for ent in doc1.ents:
+    #     print(ent.text, ent.label_)
+    i = 0
+    while i < len(doc1):
+        # print(i)
+        print("lemma", doc1[i].lemma_)
+        print("POS", doc1[i].tag_)
+        print("dependencies?", doc1[i].dep_)
+        i += 1
+
+    doc = nlp("Apple is looking at buying U.K. startup for $1 billion in the Spring to Autumn.")
+
+    for ent in doc.ents:
+        print(ent.text, ent.label_)
+
+    return t
+
+
 if __name__ == '__main__':
     from sys import argv
 
@@ -65,31 +100,6 @@ if __name__ == '__main__':
 # # Press the green button in the gutter to run the script.
 # if __name__ == '__main__':
 #     print_hi('PyCharm')
-#
-# nlp = spacy.load("en_core_web_sm")
-# doc1 = nlp("Apple is looking at buying U.K. startup for $1 billion.")
-# print(doc1)
-# # Iterate over tokens in a Doc
-#
-# for token in doc1:
-#     # Print the text and the predicted part-of-speech tag
-#     # predictive part of this may not be needed
-#     print({"text": token.text, "pos": token.pos_, "predictive": token.head.text})
-#     print(token)
-#     # for ent in doc1.ents:
-#     #     print(ent.text, ent.label_)
-#
-# i = 0
-# while i < len(doc1):
-#     # print(i)
-#     print("lemma", doc1[i].lemma_)
-#     print("POS", doc1[i].tag_)
-#     print("dependencies?", doc1[i].dep_)
-#     i += 1
-#
-# doc = nlp("Apple is looking at buying U.K. startup for $1 billion in the Spring to Autumn.")
-#
-# for ent in doc.ents:
-#     print(ent.text, ent.label_)
+
 
 # See PyCharm help at https://www.jetbrains.com/help/pycharm/
