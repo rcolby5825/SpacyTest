@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, render_template
 from waitress import serve
 import json
 
@@ -11,7 +11,7 @@ app = Flask(__name__)
 def hello_world():
     main.testcase()
     print(main.t)
-    return json.dumps(main.t)
+    return render_template("index.html"), json.dumps(main.t)
 
 
 if __name__ == "__main__":
