@@ -6,9 +6,10 @@ import requests
 from http.server import BaseHTTPRequestHandler, HTTPServer
 import logging
 
-
 # port = 3005
 t = []
+
+
 
 class S(BaseHTTPRequestHandler):
     def _set_response(self):
@@ -24,8 +25,6 @@ class S(BaseHTTPRequestHandler):
         self.wfile.write("GET request for {}".format(self.path).encode('utf-8'))
         # self.wfile.write(json.dumps(t).format(self.path).encode('utf-8'))
 
-
-
     def do_POST(self):
         content_length = int(self.headers['Content-Length'])  # <--- Gets the size of data
         post_data = self.rfile.read(content_length)  # <--- Gets the data itself
@@ -36,17 +35,17 @@ class S(BaseHTTPRequestHandler):
         self.wfile.write("POST request for {}".format(self.path).encode('utf-8'))
 
 
-def run(server_class=HTTPServer, handler_class=S, port=8080):
-    # logging.basicConfig(level=logging.INFO)
-    server_address = ('', port)
-    httpd = server_class(server_address, handler_class)
-    logging.info('Starting httpd...\n')
-    try:
-        httpd.serve_forever()
-    except KeyboardInterrupt:
-        pass
-    httpd.server_close()
-    logging.info('Stopping httpd...\n')
+# def run(server_class=HTTPServer, handler_class=S, port=8080):
+#     # logging.basicConfig(level=logging.INFO)
+#     server_address = ('', port)
+#     httpd = server_class(server_address, handler_class)
+#     logging.info('Starting httpd...\n')
+#     try:
+#         httpd.serve_forever()
+#     except KeyboardInterrupt:
+#         pass
+#     httpd.server_close()
+#     logging.info('Stopping httpd...\n')
 
 
 def testcase():
@@ -80,13 +79,13 @@ def testcase():
 
 
 if __name__ == '__main__':
+    # hello_world()
     from sys import argv
 
     # if len(argv) == 2:
     #     run(port=int(argv[1]))
     # else:
-    run()
-
+    # run()
 
 # Press Shift+F10 to execute it or replace it with your code.
 # Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
