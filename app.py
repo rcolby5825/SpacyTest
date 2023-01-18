@@ -1,14 +1,19 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 from waitress import serve
 import json
-
 import main
 
 app = Flask(__name__)
 
 
-@app.route('/')
-def hello_world():
+@app.route('/', methods=["GET", "POST"])
+def gfg():
+    if request.method == "POST":
+    # getting input with name = fname in HTML form
+        first_name = request.form.get("sentence")
+        # display_data = find_element(, 'loginForm')
+        # getting input with name = lname in HTML form
+        return first_name
     main.testcase()
     print(main.t)
     return render_template("index.html"), json.dumps(main.t)

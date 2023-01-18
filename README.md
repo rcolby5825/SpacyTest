@@ -1,7 +1,7 @@
 # Spacy Test Module
 
 ### Installation -
-    To run flask develeop server run command - python3 -m flask run. - Go to localhost:5000.
+    To run flask development server run command - python3 -m flask run - Go to localhost:5000.
     To run production server run app script. - Waitress WSGI production server.
     To build docker image run command - docker build --tag {containernamehere} .
     To run docker container - docker run --publish 8080:8080 python-docker1
