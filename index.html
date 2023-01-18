@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SpacyNLP</title>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js">  </script>
+    <script>
+        $(document).ready(function(){
+            let sentence;
+            $("#submit").click(function(){
+                sentence=$("#sentence").val();
+                $.ajax({
+                    url : "/sentence",
+                    type: "POST",
+                    data: JSON.stringify(
+                        {sentence: sentence},
+                    ),
+                    contentType: "application/json; charset=utf-8",
+                    dataType   : "json",
+                    success    : function(response){
+                        console.log(response);
+                        //alert('success')
+                        console.log("Pure jQuery Pure JS object");
+                        document.getElementById('showResults').innerText = JSON.stringify(response)
+                    }
+                });
+                // $.post("http://localhost:3000/login",JSON.stringify([{sentence:sentence}]), function(data){
+                //     if(data === 'yes') {
+                //         alert("login success");
+                //     }
+                // });
+            });
+        });
+    </script>
+</head>
+<body>
+<p>Type text and hit submit for Spacy NLP.</p>
+<input id="sentence" size="40" type="TEXT" />
+<input id="submit" type="button" value="Submit" />
+<div><p><span id="showResults"></span></p></div>
+</body>
+</html>
