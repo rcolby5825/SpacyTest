@@ -16,6 +16,8 @@ lemma = ''
 
 # print("Python %s on %s" % (sys.version, sys.platform))
 def get_doc(name):
+    global d
+    d = []
     # doc1 = nlp("Apple is looking at buying U.K. startup for $1 billion.")
     doc1 = nlp(name)
     # print(doc1)
@@ -55,6 +57,9 @@ def get_doc(name):
 # gets tokens from the sentence
 def get_tokens(name):
     global lemma
+    lemma = ''
+    global t
+    t = []
     doc2 = nlp(name)
     date = datetime.date.today()
     # print("\n Default Date Object:", date, "\n")
@@ -108,9 +113,10 @@ def print_sentence(name):
     # get_entities(name)
     get_doc(name)
     # print('lemma' + lemma)
-    # print(
-    #     json.dumps({"docDate": formatted_date, "sentence": name, "lemmaSentence": lemma, "sentences": [{"tokens": t}, {"named_entities": e}]}))
+    print(
+        json.dumps({"docDate": formatted_date, "sentence": name, "lemmaSentence": lemma, "sentences": [{"tokens": t}, {"named_entities": e}]}))
     # print(json.dumps({"named_entities": e}))
+    return json.dumps({"docDate": formatted_date, "sentence": name, "lemmaSentence": lemma, "sentences": [{"tokens": t}, {"named_entities": e}]})
 
 
 # Press the green button in the gutter to run the script.

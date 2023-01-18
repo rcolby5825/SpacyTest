@@ -2,6 +2,7 @@ from flask import Flask, render_template, request
 from waitress import serve
 import json
 import main
+import nlp_spacy_service
 
 app = Flask(__name__)
 
@@ -13,9 +14,11 @@ def gfg():
         first_name = request.form.get("sentence")
         # display_data = find_element(, 'loginForm')
         # getting input with name = lname in HTML form
-        return first_name
-    main.testcase()
-    print(main.t)
+        #add async await here
+        json_final = nlp_spacy_service.print_sentence(first_name)
+        return json_final
+    # main.testcase()
+    # print(main.t)
     return render_template("index.html"), json.dumps(main.t)
 
 
