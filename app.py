@@ -22,5 +22,15 @@ def gfg():
     return render_template("index.html"), json.dumps(main.t)
 
 
+@app.route('/sentence', methods=["POST"])
+def sentence():
+    content_type = request.headers.get('Content-Type')
+    if content_type == 'application/json':
+        json = request.json
+        return json
+    else:
+        return 'Content-Type not supported!'
+
+
 if __name__ == "__main__":
     serve(app, host="0.0.0.0", port=8085)

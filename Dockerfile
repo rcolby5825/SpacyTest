@@ -1,4 +1,3 @@
-#FROM python:3.5-slim
 FROM python:3.10.9
 MAINTAINER rcolby1313 <rachael.colby@dharbor.com>
 
