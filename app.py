@@ -1,10 +1,13 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, make_response
+from flask_cors import CORS
 from waitress import serve
 import json
 import main
 import nlp_spacy_service
 
 app = Flask(__name__)
+
+CORS(app)
 
 
 @app.route('/', methods=["GET", "POST"])
@@ -25,9 +28,9 @@ def gfg():
 @app.route('/sentence', methods=["POST"])
 def sentence():
     content_type = request.headers.get('Content-Type')
-    if content_type == 'application/json':
-        json = request.json
-        return json
+    if content_type == 'application/json; charset=utf-8':
+        nlp_obj = nlp_spacy_service.print_sentence(request.json['sentence'])
+        return nlp_obj
     else:
         return 'Content-Type not supported!'
 
