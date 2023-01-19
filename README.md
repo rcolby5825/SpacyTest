@@ -6,6 +6,8 @@
     To build docker image run command - docker build --tag {containernameinlowercasehere} .
     To run docker container - docker run --publish 8085:8085 {containernameinlowercasehere}
 
+### Update Requirements
+    To create and update the requirements.txt - use command - pip install pipreq
 
 
 

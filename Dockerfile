@@ -26,6 +26,7 @@ RUN pip install --upgrade pip setuptools
 COPY requirements.txt .
 
 RUN pip install -r requirements.txt
+#this will need to be moved to requirements txt
 #RUN pip3 install -r requirements.txt
 ##installing spacy seperately for now
 #RUN pip3 install spacy
@@ -38,8 +39,8 @@ RUN pip install -r requirements.txt
 
 WORKDIR /usr/venv
 COPY main.py .
-
 COPY app.py .
+COPY nlp_spacy_service.py .
 
 # CMD ["python3", "main.py"]
 CMD ["python3", "app.py"]
