@@ -2,9 +2,8 @@ from flask import Flask, render_template, request, make_response
 from flask_cors import CORS
 from waitress import serve
 import json
-import main
 import nlp_spacy_service
-
+import config as cfg
 app = Flask(__name__)
 
 CORS(app)
@@ -22,7 +21,7 @@ def gfg():
         return json_final
     # main.testcase()
     # print(main.t)
-    return render_template("index.html"), json.dumps(main.t)
+    return render_template("index.html")
 
 
 @app.route('/sentence', methods=["POST"])
@@ -36,4 +35,4 @@ def sentence():
 
 
 if __name__ == "__main__":
-    serve(app, host="0.0.0.0", port=8085)
+    serve(app, host=cfg.environment["host"], port=cfg.environment["port"])

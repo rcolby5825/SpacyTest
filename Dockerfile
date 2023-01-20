@@ -39,7 +39,7 @@ RUN pip install -r requirements.txt
 
 WORKDIR /usr/venv
 COPY main.py .
-COPY app.py .
+COPY config.py .
 COPY nlp_spacy_service.py .
 
 # CMD ["python3", "main.py"]
