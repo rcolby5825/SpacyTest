@@ -1,7 +1,7 @@
 # Spacy NLP Service
 
 ### Description - 
-    Runs Spacy Natural Languange Processing as a service.
+    Runs Spacy Natural Languange Processing as a service. Created as an initial POC as a microservice to be backwards compatibility with Stanford NLP LLM by having the outputs be generated the same for the application programming interface (API).  
 
 ### Installation -
     To run flask development server run command - python3 -m flask run - Go to localhost:5000.
